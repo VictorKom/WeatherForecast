@@ -15,7 +15,7 @@ fun ViewGroup.inflate (layoutId: Int, attachToRoot: Boolean = false): View {
 }
 
 fun ImageView.setWeatherIcon (iconName: String) {
-    val url = "http://openweathermap.org/img/wn/$iconName@2x.png"
+    val url = "https://openweathermap.org/img/wn/$iconName@2x.png"
     Picasso.get().load(url).into(this)
 }
 
