@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="icon">icon</string>
+
+    <string name="windSpeed">Ветер:</string>
+    <string name="pressure">Атм. давление:</string>
+    <string name="pressureUnit">мм рт.ст.</string>
+    <string name="windSpeedUnit">м/с</string>
+
+    <string name="weatherDescr">Ясно</string>
+    <string name="temperature">--</string>
+
+    <string name="tomorrow">Завтра</string>
+
+    <string name="update">Обновить</string>
+    <string name="errLocMessage">Не удалось определить местоположение</string>
+    <string name="errNetMessage">Отсутсвует подключение к интернету</string>
+
+    <string name="titleDialogSet">Нужен доступ к местоположению</string>
+    <string name="messageDialogSet">Для точного прогноза погоды нам надо узнать, где Вы есйчас находитесь</string>
+    <string name="posButDialogSet">Настройки</string>
+    <string name="negButDialogSet">Отмена</string>
+    <string name="rightNow">сейчас</string>
+</resources>
