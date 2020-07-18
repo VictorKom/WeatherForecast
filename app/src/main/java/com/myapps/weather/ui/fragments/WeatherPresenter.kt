@@ -7,9 +7,10 @@ import com.myapps.weather.utils.ForecastConverter
 import io.reactivex.disposables.CompositeDisposable
 import moxy.InjectViewState
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 @InjectViewState
-class WeatherPresenter constructor(private val remoteRepository: RemoteRepository) : MvpPresenter<WeatherView>() {
+class WeatherPresenter @Inject constructor(private val remoteRepository: RemoteRepository) : MvpPresenter<WeatherView>() {
 
     private val disposables = CompositeDisposable()
     private val forecastConverter = ForecastConverter()

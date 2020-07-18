@@ -1,8 +1,8 @@
 package com.myapps.weather.ui.fragments
 
-import com.myapps.weather.network.CurrentWeather
-import com.myapps.weather.network.DailyWeather
-import com.myapps.weather.network.WeatherByTime
+import com.myapps.weather.data.network.CurrentWeather
+import com.myapps.weather.data.network.DailyWeather
+import com.myapps.weather.data.network.WeatherByTime
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndStrategy
 import moxy.viewstate.strategy.SkipStrategy

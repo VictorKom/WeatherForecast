@@ -22,6 +22,10 @@ android {
         targetCompatibility 1.8
     }
 
+    kotlinOptions {
+        jvmTarget = 1.8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -66,7 +70,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Dagger 2
-    String daggerVersion = "2.21"
+    String daggerVersion = "2.27"
     implementation "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 }

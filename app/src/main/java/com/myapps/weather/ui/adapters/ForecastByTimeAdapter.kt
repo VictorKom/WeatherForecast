@@ -1,27 +1,32 @@
 package com.myapps.weather.ui.adapters
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.myapps.weather.App
 import com.myapps.weather.R
-import com.myapps.weather.network.WeatherByTime
-import com.myapps.weather.utils.inflate
+import com.myapps.weather.data.network.WeatherByTime
 import com.myapps.weather.utils.setWeatherIcon
-import kotlinx.android.synthetic.main.fragment_weather.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
+import com.myapps.weather.utils.Symbols.CELSIUS_DEGREE_SYMBOL
+import com.myapps.weather.utils.Symbols.PLUS
 
 class ForecastByTimeAdapter : RecyclerView.Adapter<ForecastByTimeAdapter.ViewHolder>() {
 
     private val forecastByTimeList = ArrayList<WeatherByTime>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.inflate(R.layout.weather_by_time))
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.weather_by_time,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -54,12 +59,12 @@ class ForecastByTimeAdapter : RecyclerView.Adapter<ForecastByTimeAdapter.ViewHol
 
             val temperatureView = weatherView.findViewById<TextView>(R.id.timeTemperature)
             val temp = weather.main.temp.toInt()
-            val tempStr = if (temp > 0) "+$temp°" else "$temp°"
+            val tempStr =
+                if (temp > 0) "$PLUS$temp$CELSIUS_DEGREE_SYMBOL" else "$temp$CELSIUS_DEGREE_SYMBOL"
             temperatureView.text = tempStr
 
             val weatherIcon = weatherView.findViewById<ImageView>(R.id.timeWeatherIcon)
             weatherIcon.setWeatherIcon(weather.weather[0].icon)
         }
     }
-
 }

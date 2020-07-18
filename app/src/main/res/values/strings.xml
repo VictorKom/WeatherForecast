@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weather</string>
+    <string name="app_name">WeatherForecast</string>
     <string name="icon">icon</string>
 
     <string name="windSpeed">Ветер:</string>

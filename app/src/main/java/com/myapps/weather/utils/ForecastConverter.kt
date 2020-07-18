@@ -1,7 +1,7 @@
 package com.myapps.weather.utils
 
-import com.myapps.weather.network.DailyWeather
-import com.myapps.weather.network.WeatherByTime
+import com.myapps.weather.data.network.DailyWeather
+import com.myapps.weather.data.network.WeatherByTime
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -14,7 +14,8 @@ class ForecastConverter {
         for (i in 1..4) {
             currentDate ++
             if (currentDate % 30 != 0) currentDate %= 30
-            val currentWeather = DailyWeather(0, 0, "", "", "")
+            val currentWeather =
+                DailyWeather(0, 0, "", "", "")
             for (weather in forecastByTimeList){
                 val day = getDay(weather.dt_txt)
                 val time = getTime(weather.dt_txt)
