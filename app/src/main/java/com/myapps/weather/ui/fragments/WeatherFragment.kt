@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.myapps.weather.App
 import com.myapps.weather.R
-import com.myapps.weather.di.DaggerActivityComponent
-import com.myapps.weather.network.CurrentWeather
-import com.myapps.weather.network.DailyWeather
-import com.myapps.weather.network.WeatherByTime
-import com.myapps.weather.ui.activities.MainActivityView
+import com.myapps.weather.data.network.CurrentWeather
+import com.myapps.weather.data.network.DailyWeather
+import com.myapps.weather.data.network.WeatherByTime
+import com.myapps.weather.ui.activity.MainActivityView
 import com.myapps.weather.ui.adapters.DailyWeatherAdapter
 import com.myapps.weather.ui.adapters.ForecastByTimeAdapter
-import com.myapps.weather.utils.inflate
+import com.myapps.weather.utils.Symbols.CELSIUS_DEGREE_SYMBOL
+import com.myapps.weather.utils.Symbols.PLUS
 import com.myapps.weather.utils.setWeatherIcon
 import kotlinx.android.synthetic.main.fragment_weather.*
 import moxy.MvpAppCompatFragment
@@ -24,6 +24,9 @@ import javax.inject.Inject
 
 class WeatherFragment : MvpAppCompatFragment(), WeatherView {
 
+    private val forecastByTimeAdapter by lazy { ForecastByTimeAdapter() }
+    private val dailyWeatherAdapter by lazy { DailyWeatherAdapter() }
+
     @Inject
     @InjectPresenter
     lateinit var weatherPresenter: WeatherPresenter
@@ -31,12 +34,9 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherView {
     @ProvidePresenter
     fun providePresenter(): WeatherPresenter = weatherPresenter
 
-    private val forecastByTimeAdapter by lazy { ForecastByTimeAdapter() }
-    private val dailyWeatherAdapter by lazy { DailyWeatherAdapter() }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        DaggerActivityComponent.builder().appComponent(App.INSTANCE.appComponent).build().inject(this)
+        App.INSTANCE.appComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -44,7 +44,7 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return container?.inflate(R.layout.fragment_weather)
+        return inflater.inflate(R.layout.fragment_weather, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -68,7 +68,7 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherView {
         updateTemperature(currentWeather)
         updatePressure(currentWeather)
         updateWindSpeed(currentWeather)
-        cityName.text = currentWeather.name
+        toolbar.title = currentWeather.name
         weatherDescription.text = currentWeather.weather[0].description
         rightNow.text = resources.getString(R.string.rightNow)
         weatherIcon.setWeatherIcon(currentWeather.weather[0].icon)
@@ -100,7 +100,8 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherView {
 
     private fun updateTemperature(currentWeather: CurrentWeather) {
         val temp = currentWeather.main.temp.toInt()
-        val temperatureStr = if (temp > 0) "+$temp°" else "$temp°"
+        val temperatureStr =
+            if (temp > 0) "$PLUS$temp$CELSIUS_DEGREE_SYMBOL" else "$temp$CELSIUS_DEGREE_SYMBOL"
         temperature.text = temperatureStr
     }
 
