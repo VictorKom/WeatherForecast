@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.myapps.weather.R
-import com.myapps.weather.ui.activities.MainActivityView
-import com.myapps.weather.utils.inflate
+import com.myapps.weather.ui.activity.MainActivityView
 import kotlinx.android.synthetic.main.fragment_location_off.*
 
 class NetworkOffFragment : Fragment() {
@@ -17,7 +16,7 @@ class NetworkOffFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return container?.inflate(R.layout.fragment_network_off)
+        return inflater.inflate(R.layout.fragment_network_off, container, false)
     }
 
     override fun onStart() {
